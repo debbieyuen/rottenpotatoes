@@ -18,9 +18,9 @@
   <thead>
     <tr>
       
-      <th><%= link_to 'Movie Title', movies_path(:sort_by => 'title', :ratings => @ratings_to_show), class: @some_var%></th>
+      <th><%= link_to 'Movie Title', movies_path(:sort_by => 'title', :ratings => @ratings_to_show), class: @some_var, id: "title_header"%></th>
       <th><%= link_to 'Rating', movies_path(:sort_by => 'rating', :ratings => @ratings_to_show), class: @some_rating%></th>
-      <th><%= link_to 'Release Date', movies_path(:sort_by => 'release_date', :ratings => @ratings_to_show), class: @some_release%></th>
+      <th><%= link_to 'Release Date', movies_path(:sort_by => 'release_date', :ratings => @ratings_to_show), class: @some_release, id: "release_date_header"%></th>
       <th>More Info</th>
     </tr>
   </thead>
