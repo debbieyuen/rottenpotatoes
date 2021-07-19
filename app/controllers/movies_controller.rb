@@ -15,11 +15,17 @@ class MoviesController < ApplicationController
       @ratings_to_show = params[:ratings]
      end
     
+    byebug 
     @sort_by = params[:sort_by]
     #it stores it as a cookie 
     if @sort_by
       session[:sort_by] = @sort_by
     end
+    
+    #when you get it back from the session
+    @sort_by = session[:sort_by]
+    #delete that session because user is doing something else 
+    #session[:sort_by].delete
      
     #set it as a session cookie again for ratings
     if !params[:ratings].nil?
