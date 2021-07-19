@@ -24,6 +24,8 @@ class MoviesController < ApplicationController
     #set it as a session cookie again for ratings
     if !params[:ratings].nil?
         session[:ratings] = params[:ratings]
+    else
+        params[:ratings] = Movie.all_ratings
     end
     
     @some_var = (session[:sort_by].eql?( "title")) ? "hilite p-3 mb-2 bg-warning": "None" 
