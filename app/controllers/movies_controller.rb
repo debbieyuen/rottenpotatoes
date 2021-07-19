@@ -15,7 +15,6 @@ class MoviesController < ApplicationController
       @ratings_to_show = params[:ratings]
      end
     
-    byebug 
     @sort_by = params[:sort_by]
     #it stores it as a cookie 
     if @sort_by
