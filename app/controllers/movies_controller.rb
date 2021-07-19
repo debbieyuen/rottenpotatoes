@@ -16,10 +16,21 @@ class MoviesController < ApplicationController
      end
     
     @sort_by = params[:sort_by]
+    #it stores it as a cookie 
+    if @sort_by
+      session[:sort_by] = @sort_by
+    end
+    #set it as a session cookie again for ratings
+    if !params[:ratings].nil?
+      session[:ratings] = params[:ratings].keys
+    end
     
-    @some_var = @sort_by ? "hilite p-3 mb-2 bg-warning": "None" 
-    if params[:ratings]
-      @movies = Movie.with_ratings(params[:ratings]).order(@sort_by)
+    @some_var = session[:sort_by] ? "hilite p-3 mb-2 bg-warning": "None" 
+    if session[:ratings]
+      puts "session"
+      puts session[:ratings]
+      puts params[:ratings]
+      @movies = Movie.with_ratings(session[:ratings]).order(session[:sort_by])
       #.order picks all the movies. it will order them in a correct way. get it from the views
        #params sort by params[:sort_by] and get information 
       #use movies_path make a call to your data base @movie = Movie.order
