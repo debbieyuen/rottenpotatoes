@@ -75,6 +75,7 @@ class MoviesController < ApplicationController
       #plug this information into order 
       #tell data base to go to Movie data base and call which method on it. And whatver methods
       #gives you, which is going to be a collection of movies. Now order them by what i specify
+ #, "sort_by": @sort_by
     else
       @movies = Movie.all
     end
@@ -88,7 +89,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
-    redirect_to movies_path
+    redirect_to movies_path(@ratings, @sort_by)
   end
 
   def edit
@@ -99,14 +100,14 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie.update_attributes!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully updated."
-    redirect_to movie_path(@movie)
+    redirect_to movie_path(@movie, @ratings, @sort_by)
   end
 
   def destroy
     @movie = Movie.find(params[:id])
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
-    redirect_to movies_path
+    redirect_to movies_path(@ratings, @sort_by)
   end
 
   private
