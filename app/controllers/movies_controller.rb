@@ -33,8 +33,18 @@ class MoviesController < ApplicationController
     #set it as a session cookie again for ratings
     if !params[:ratings].nil?
         session[:ratings] = params[:ratings]
-    else
-        params[:ratings] = Movie.all_ratings
+#     else
+#         params[:ratings] = Movie.all_ratings
+    end
+    
+    # If neither params or session exists show all 
+    if params[:ratings].nil? && session[:ratings].nil?
+      params[:ratings] = Movie.all_ratings
+      session[:ratings] = params[:ratings]
+    end
+    
+    if params[:ratings].nil? && session[:ratings]
+      params[:ratings] = session[:ratings]
     end
     
     if !session[:ratings].nil?
@@ -49,6 +59,7 @@ class MoviesController < ApplicationController
     if session[:ratings]
       puts "session"
       puts session[:ratings]
+      puts "params[:ratings]"
       puts params[:ratings]
       
       if(params[:ratings].is_a?(Hash))
