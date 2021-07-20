@@ -9,10 +9,14 @@ class MoviesController < ApplicationController
 
   def index
      
-     if params[:ratings].nil?
+     if params[:ratings].nil? 
       @ratings_to_show = Movie.all_ratings
      else 
-      @ratings_to_show = params[:ratings]
+#       if !session[:ratings].nil?
+#         @ratings_to_show = session[:ratings]
+#       else
+        @ratings_to_show = params[:ratings]
+#       end
      end
     
     @sort_by = params[:sort_by]
@@ -32,6 +36,12 @@ class MoviesController < ApplicationController
     else
         params[:ratings] = Movie.all_ratings
     end
+    
+    if !session[:ratings].nil?
+       @ratings_to_show = session[:ratings]
+    end
+    
+
     
     @some_var = (session[:sort_by].eql?( "title")) ? "hilite p-3 mb-2 bg-warning": "None" 
     @some_rating = (session[:sort_by].eql?( "rating")) ? "hilite p-3 mb-2 bg-warning": "None" 
